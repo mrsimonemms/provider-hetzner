@@ -1,0 +1,33 @@
+{
+  "name": "devcontainer",
+  "image": "ghcr.io/mrsimonemms/devcontainers/base",
+  "features": {
+    "ghcr.io/devcontainers/features/go:1": {
+      "version": "1.21.13",
+      "golangciLintVersion": "1.54.0"
+    },
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "minikube": "none"
+    },
+    "ghcr.io/rio/features/k9s:1": {},
+    "ghcr.io/rio/features/k3d:1": {},
+    "ghcr.io/devcontainers-contrib/features/kubectx-kubens:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-vscode.makefile-tools",
+        "golang.go"
+      ],
+      "settings": {}
+    }
+  },
+  "postCreateCommand": {
+    "get_submodules": "make submodules",
+    "helm-completion": "helm completion bash | sudo tee -a /etc/bash_completion.d/helm > /dev/null"
+  },
+  "containerEnv": {
+    "provider_name": "Hetzner"
+  }
+}
