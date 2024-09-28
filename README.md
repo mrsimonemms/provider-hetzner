@@ -1,7 +1,7 @@
-# provider-template
+# provider-hetzner
 
-`provider-template` is a minimal [Crossplane](https://crossplane.io/) Provider
-that is meant to be used as a template for implementing new Providers. It comes
+`provider-hetzner` is a minimal [Crossplane](https://crossplane.io/) Provider
+that is meant to be used as a hetzner for implementing new Providers. It comes
 with the following features that are meant to be refactored:
 
 - A `ProviderConfig` type that only points to a credentials `Secret`.
@@ -11,7 +11,7 @@ with the following features that are meant to be refactored:
 
 ## Developing
 
-1. Use this repository as a template to create a new one.
+1. Use this repository as a hetzner to create a new one.
 1. Run `make submodules` to initialize the "build" Make submodule we use for CI/CD.
 1. Rename the provider by running the following command:
 ```shell

@@ -4,14 +4,14 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: providerconfigusages.template.crossplane.io
+  name: providerconfigusages.hetzner.crossplane.io
 spec:
-  group: template.crossplane.io
+  group: hetzner.crossplane.io
   names:
     categories:
     - crossplane
     - provider
-    - template
+    - hetzner
     kind: ProviderConfigUsage
     listKind: ProviderConfigUsageList
     plural: providerconfigusages

@@ -1,4 +1,4 @@
-module github.com/crossplane/provider-template
+module github.com/crossplane/provider-hetzner
 
 go 1.21
 
