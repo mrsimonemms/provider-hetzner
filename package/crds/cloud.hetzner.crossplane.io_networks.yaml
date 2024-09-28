@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.14.0
-  name: mytypes.sample.hetzner.crossplane.io
+  name: networks.cloud.hetzner.crossplane.io
 spec:
-  group: sample.hetzner.crossplane.io
+  group: cloud.hetzner.crossplane.io
   names:
     categories:
     - crossplane
     - managed
     - hetzner
-    kind: MyType
-    listKind: MyTypeList
-    plural: mytypes
-    singular: mytype
+    kind: Network
+    listKind: NetworkList
+    plural: networks
+    singular: network
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,7 +34,7 @@ spec:
     name: v1alpha1
     schema:
       openAPIV3Schema:
-        description: A MyType is an example API type.
+        description: A Network is an example API type.
         properties:
           apiVersion:
             description: |-
@@ -54,7 +54,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: A MyTypeSpec defines the desired state of a MyType.
+            description: A NetworkSpec defines the desired state of a Network.
             properties:
               deletionPolicy:
                 default: Delete
@@ -71,7 +71,7 @@ spec:
                 - Delete
                 type: string
               forProvider:
-                description: MyTypeParameters are the configurable fields of a MyType.
+                description: NetworkParameters are the configurable fields of a Network.
                 properties:
                   configurableField:
                     type: string
@@ -246,17 +246,13 @@ spec:
             - forProvider
             type: object
           status:
-            description: A MyTypeStatus represents the observed state of a MyType.
+            description: A NetworkStatus represents the observed state of a Network.
             properties:
               atProvider:
-                description: MyTypeObservation are the observable fields of a MyType.
+                description: NetworkObservation are the observable fields of a Network.
                 properties:
-                  configurableField:
-                    type: string
                   observableField:
                     type: string
-                required:
-                - configurableField
                 type: object
               conditions:
                 description: Conditions of the resource.
