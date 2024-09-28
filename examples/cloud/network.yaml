@@ -1,9 +1,22 @@
+# Example based on https://docs.hetzner.cloud/#networks-create-a-network
 apiVersion: cloud.hetzner.crossplane.io/v1alpha1
 kind: Network
 metadata:
   name: example
 spec:
   forProvider:
-    configurableField: test
+    ipRange: 10.0.0.0/16
+    subnets:
+      - type: cloud
+        ipRange: 10.0.0.0/24
+        networkZone: eu-central
+    routes:
+      - destination: 10.100.1.0/24
+        gateway: 10.0.1.1
+    exposeRoutesToSwitch: false
+    labels:
+      environment: prod
+      example.com/my: label
+      just-a-key: ""
   providerConfigRef:
     name: example
