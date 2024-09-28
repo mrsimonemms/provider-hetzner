@@ -37,10 +37,10 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	"github.com/crossplane/provider-hetzner/apis"
-	"github.com/crossplane/provider-hetzner/apis/v1alpha1"
-	hetzner "github.com/crossplane/provider-hetzner/internal/controller"
-	"github.com/crossplane/provider-hetzner/internal/features"
+	"github.com/mrsimonemms/provider-hetzner/apis"
+	"github.com/mrsimonemms/provider-hetzner/apis/v1alpha1"
+	hetzner "github.com/mrsimonemms/provider-hetzner/internal/controller"
+	"github.com/mrsimonemms/provider-hetzner/internal/features"
 )
 
 func main() {

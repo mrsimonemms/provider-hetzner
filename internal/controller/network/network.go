@@ -32,13 +32,13 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
-	"github.com/crossplane/provider-hetzner/apis/cloud/v1alpha1"
-	apisv1alpha1 "github.com/crossplane/provider-hetzner/apis/v1alpha1"
-	"github.com/crossplane/provider-hetzner/internal/features"
+	"github.com/mrsimonemms/provider-hetzner/apis/cloud/v1alpha1"
+	apisv1alpha1 "github.com/mrsimonemms/provider-hetzner/apis/v1alpha1"
+	"github.com/mrsimonemms/provider-hetzner/internal/features"
 )
 
 const (
-	errNotNetwork    = "managed resource is not a Network custom resource"
+	errNotNetwork   = "managed resource is not a Network custom resource"
 	errTrackPCUsage = "cannot track ProviderConfig usage"
 	errGetPC        = "cannot get ProviderConfig"
 	errGetCreds     = "cannot get credentials"

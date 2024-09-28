@@ -20,8 +20,8 @@ package apis
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	cloudv1alpha1 "github.com/crossplane/provider-hetzner/apis/cloud/v1alpha1"
-	hetznerv1alpha1 "github.com/crossplane/provider-hetzner/apis/v1alpha1"
+	cloudv1alpha1 "github.com/mrsimonemms/provider-hetzner/apis/cloud/v1alpha1"
+	hetznerv1alpha1 "github.com/mrsimonemms/provider-hetzner/apis/v1alpha1"
 )
 
 func init() {

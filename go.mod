@@ -1,4 +1,4 @@
-module github.com/crossplane/provider-hetzner
+module github.com/mrsimonemms/provider-hetzner
 
 go 1.21
 

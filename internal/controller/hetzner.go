@@ -20,8 +20,8 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/controller"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/crossplane/provider-hetzner/internal/controller/config"
-	"github.com/crossplane/provider-hetzner/internal/controller/network"
+	"github.com/mrsimonemms/provider-hetzner/internal/controller/config"
+	"github.com/mrsimonemms/provider-hetzner/internal/controller/network"
 )
 
 // Setup creates all Hetzner controllers with the supplied logger and adds them to
