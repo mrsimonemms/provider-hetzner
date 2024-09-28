@@ -88,19 +88,28 @@ run: go.build
 	$(GO_OUT_DIR)/provider --debug
 
 dev: $(KIND) $(KUBECTL)
-	@$(INFO) Creating kind cluster
-	@$(KIND) create cluster --name=$(PROJECT_NAME)-dev
-	@$(KUBECTL) cluster-info --context kind-$(PROJECT_NAME)-dev
+	@$(INFO) Creating k3d cluster
+	@k3d cluster create $(PROJECT_NAME)-dev
+	@$(KUBECTL) cluster-info --context k3d-$(PROJECT_NAME)-dev
 	@$(INFO) Installing Crossplane CRDs
-	@$(KUBECTL) apply --server-side -k https://github.com/crossplane/crossplane//cluster?ref=master
+	@helm upgrade \
+		--atomic \
+		--cleanup-on-fail \
+		--create-namespace \
+		--install \
+		--namespace crossplane-system \
+		--repo https://charts.crossplane.io/stable \
+		--reset-values \
+		--wait \
+		crossplane crossplane
 	@$(INFO) Installing Provider Hetzner CRDs
 	@$(KUBECTL) apply -R -f package/crds
 	@$(INFO) Starting Provider Hetzner controllers
 	@$(GO) run cmd/provider/main.go --debug
 
 dev-clean: $(KIND) $(KUBECTL)
-	@$(INFO) Deleting kind cluster
-	@$(KIND) delete cluster --name=$(PROJECT_NAME)-dev
+	@$(INFO) Deleting k3d cluster
+	@k3d cluster delete $(PROJECT_NAME)-dev
 
 .PHONY: submodules fallthrough test-integration run dev dev-clean
 
