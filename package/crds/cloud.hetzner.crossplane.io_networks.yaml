@@ -73,10 +73,51 @@ spec:
               forProvider:
                 description: NetworkParameters are the configurable fields of a Network.
                 properties:
-                  configurableField:
+                  exposeRoutesToSwitch:
+                    default: false
+                    type: boolean
+                  ipRange:
                     type: string
+                  labels:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  routes:
+                    items:
+                      properties:
+                        destination:
+                          type: string
+                        gateway:
+                          type: string
+                      required:
+                      - destination
+                      - gateway
+                      type: object
+                    type: array
+                  subnets:
+                    items:
+                      properties:
+                        ipRange:
+                          type: string
+                        networkZone:
+                          description: NetworkZone specifies a network zone.
+                          type: string
+                        type:
+                          description: NetworkSubnetType specifies a type of a subnet.
+                          type: string
+                        vswitchId:
+                          format: int64
+                          type: integer
+                      required:
+                      - ipRange
+                      - networkZone
+                      - type
+                      type: object
+                    minItems: 1
+                    type: array
                 required:
-                - configurableField
+                - ipRange
+                - subnets
                 type: object
               managementPolicies:
                 default:
@@ -251,8 +292,60 @@ spec:
               atProvider:
                 description: NetworkObservation are the observable fields of a Network.
                 properties:
-                  observableField:
-                    type: string
+                  id:
+                    format: int64
+                    type: integer
+                  params:
+                    description: NetworkParameters are the configurable fields of
+                      a Network.
+                    properties:
+                      exposeRoutesToSwitch:
+                        default: false
+                        type: boolean
+                      ipRange:
+                        type: string
+                      labels:
+                        additionalProperties:
+                          type: string
+                        type: object
+                      routes:
+                        items:
+                          properties:
+                            destination:
+                              type: string
+                            gateway:
+                              type: string
+                          required:
+                          - destination
+                          - gateway
+                          type: object
+                        type: array
+                      subnets:
+                        items:
+                          properties:
+                            ipRange:
+                              type: string
+                            networkZone:
+                              description: NetworkZone specifies a network zone.
+                              type: string
+                            type:
+                              description: NetworkSubnetType specifies a type of a
+                                subnet.
+                              type: string
+                            vswitchId:
+                              format: int64
+                              type: integer
+                          required:
+                          - ipRange
+                          - networkZone
+                          - type
+                          type: object
+                        minItems: 1
+                        type: array
+                    required:
+                    - ipRange
+                    - subnets
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

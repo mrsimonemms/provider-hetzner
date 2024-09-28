@@ -23,16 +23,48 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/hetznercloud/hcloud-go/v2/hcloud"
 )
+
+type NetworkRoute struct {
+	Destination string `json:"destination"` // Used as *net.IPNet internally
+	Gateway     string `json:"gateway"`
+}
+
+type NetworkSubnet struct {
+	Type        hcloud.NetworkSubnetType `json:"type"`
+	IPRange     string                   `json:"ipRange"` // Used as *net.IPNet internally
+	NetworkZone hcloud.NetworkZone       `json:"networkZone"`
+
+	// +kubebuilder:validation:Optional
+	VSwitchID int64 `json:"vswitchId"`
+}
 
 // NetworkParameters are the configurable fields of a Network.
 type NetworkParameters struct {
-	ConfigurableField string `json:"configurableField"`
+	IPRange string `json:"ipRange"`
+
+	// +kubebuilder:validation:MinItems:=1
+	Subnets []NetworkSubnet `json:"subnets"`
+
+	// +kubebuilder:validation:Optional
+	Routes []NetworkRoute `json:"routes"`
+
+	// +kubebuilder:validation:Optional
+	Labels map[string]string `json:"labels,omitempty"`
+
+	// +kubebuilder:default:=false
+	// +kubebuilder:validation:Optional
+	ExposeRoutesToVSwitch bool `json:"exposeRoutesToSwitch"`
 }
 
 // NetworkObservation are the observable fields of a Network.
 type NetworkObservation struct {
-	ObservableField string `json:"observableField,omitempty"`
+	// +kubebuilder:validation:Optional
+	ID int64 `json:"id"`
+
+	// +kubebuilder:validation:Optional
+	*NetworkParameters `json:"params,omitempty"`
 }
 
 // A NetworkSpec defines the desired state of a Network.
@@ -62,6 +94,27 @@ type Network struct {
 
 	Spec   NetworkSpec   `json:"spec"`
 	Status NetworkStatus `json:"status,omitempty"`
+}
+
+func (n *Network) IsUpToDate() bool {
+	target := n.Spec.ForProvider
+	current := n.Status.AtProvider.NetworkParameters
+
+	if current == nil {
+		// No parameters set
+		return false
+	}
+	if target.ExposeRoutesToVSwitch != current.ExposeRoutesToVSwitch {
+		return false
+	}
+	if !reflect.DeepEqual(target.Labels, current.Labels) {
+		return false
+	}
+	if target.IPRange != current.IPRange {
+		return false
+	}
+
+	return true
 }
 
 // +kubebuilder:object:root=true
