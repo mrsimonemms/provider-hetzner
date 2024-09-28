@@ -107,6 +107,18 @@ dev: $(KIND) $(KUBECTL)
 	@$(INFO) Starting Provider Hetzner controllers
 	@$(GO) run cmd/provider/main.go --debug
 
+dev-deploy:
+	@$(INFO) Create credential secret
+	@$(KUBECTL) create secret generic example-provider-secret -n crossplane-system --from-literal credentials=${HCLOUD_TOKEN}
+	@$(INFO) Deploy example provider config
+	@$(KUBECTL) apply -R -f examples/provider
+
+dev-undeploy:
+	@$(INFO) Delete credential secret
+	@$(KUBECTL) delete secret example-provider-secret
+	@$(INFO) Deploy example provider config
+	@$(KUBECTL) delete -R -f examples/provider
+
 dev-clean: $(KIND) $(KUBECTL)
 	@$(INFO) Deleting k3d cluster
 	@k3d cluster delete $(PROJECT_NAME)-dev
