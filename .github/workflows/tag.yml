@@ -10,6 +10,10 @@ on:
         description: 'Tag message'
         required: true
 
+permissions:
+  actions: write
+  contents: write
+
 jobs:
   create-tag:
     runs-on: ubuntu-22.04
