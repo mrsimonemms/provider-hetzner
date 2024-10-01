@@ -1,0 +1,26 @@
+# Example based on https://docs.hetzner.cloud/#servers-create-a-server
+apiVersion: cloud.hetzner.crossplane.io/v1alpha1
+kind: Server
+metadata:
+  name: example
+spec:
+  forProvider:
+    location: nbg1
+    image: ubuntu-24.04
+    serverType: cpx11
+    firewallIDs: []
+    networkIDs: []
+    placementGroupID: null
+    volumeIDs: []
+    sshKeys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH+BJoUjyLjczQ4iGG18BwcU6IU6+0K0AvyqJlkz6ZXf user@example.com
+    labels:
+      environment: prod
+      example.com/my: label
+      just-a-key: ""
+    powerOn: true
+  providerConfigRef:
+    name: example
+  writeConnectionSecretToRef:
+    namespace: default
+    name: example-server-connection
