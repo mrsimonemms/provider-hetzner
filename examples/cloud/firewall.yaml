@@ -1,0 +1,27 @@
+# Example based on https://docs.hetzner.cloud/#networks-create-a-network
+apiVersion: cloud.hetzner.crossplane.io/v1alpha1
+kind: Firewall
+metadata:
+  name: example
+spec:
+  forProvider:
+    applyTo:
+      - type: label_selector
+        labels:
+          environment: prod
+    rules:
+      - description: Allow port 80
+        direction: in
+        port:
+          start: 80
+        protocol: tcp
+        targetIPs:
+          - 28.239.13.1/32
+          - 28.239.14.0/24
+          - ff21:1eac:9a3b:ee58:5ca:990c:8bc9:c03b/128
+    labels:
+      environment: prod
+      example.com/my: label
+      just-a-key: ""
+  providerConfigRef:
+    name: example
