@@ -1,0 +1,15 @@
+# Example based on https://docs.hetzner.cloud/#volumes-create-a-volume
+apiVersion: cloud.hetzner.crossplane.io/v1alpha1
+kind: Volume
+metadata:
+  name: example
+spec:
+  forProvider:
+    automount: true
+    format: xfs
+    labels:
+      labelKey: value
+    location: nbg1
+    size: 42
+  providerConfigRef:
+    name: example

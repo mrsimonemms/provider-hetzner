@@ -24,6 +24,7 @@ import (
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/firewall"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/network"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/server"
+	"github.com/mrsimonemms/provider-hetzner/internal/controller/volume"
 )
 
 // Setup creates all Hetzner controllers with the supplied logger and adds them to
@@ -34,6 +35,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		firewall.Setup,
 		network.Setup,
 		server.Setup,
+		volume.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
