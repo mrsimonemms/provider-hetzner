@@ -17,7 +17,6 @@ limitations under the License.
 package v1alpha1
 
 import (
-	"fmt"
 	"reflect"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -136,9 +135,6 @@ func (s *Server) IsUpToDate() bool {
 		return false
 	}
 	if target.PowerOn != current.PowerOn {
-		fmt.Println("POWER STATE CHANGE")
-		fmt.Println(target.PowerOn)
-		fmt.Println(current.PowerOn)
 		return false
 	}
 
