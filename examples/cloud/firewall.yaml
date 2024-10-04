@@ -1,4 +1,4 @@
-# Example based on https://docs.hetzner.cloud/#networks-create-a-network
+# Example based on https://docs.hetzner.cloud/#firewalls-create-a-firewall
 apiVersion: cloud.hetzner.crossplane.io/v1alpha1
 kind: Firewall
 metadata:
