@@ -22,6 +22,7 @@ import (
 
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/config"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/firewall"
+	"github.com/mrsimonemms/provider-hetzner/internal/controller/loadbalancer"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/network"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/placementgroup"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/server"
@@ -34,6 +35,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		config.Setup,
 		firewall.Setup,
+		loadbalancer.Setup,
 		network.Setup,
 		placementgroup.Setup,
 		server.Setup,
