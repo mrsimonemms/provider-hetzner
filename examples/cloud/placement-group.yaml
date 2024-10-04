@@ -1,0 +1,13 @@
+# Example based on https://docs.hetzner.cloud/#placement-groups-create-a-placementgroup
+apiVersion: cloud.hetzner.crossplane.io/v1alpha1
+kind: PlacementGroup
+metadata:
+  name: example
+spec:
+  forProvider:
+    labels:
+      environment: prod
+      example.com/my: label
+      just-a-key: ""
+  providerConfigRef:
+    name: example
