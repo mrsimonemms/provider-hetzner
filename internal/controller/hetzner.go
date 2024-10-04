@@ -23,6 +23,7 @@ import (
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/config"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/firewall"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/network"
+	"github.com/mrsimonemms/provider-hetzner/internal/controller/placementgroup"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/server"
 	"github.com/mrsimonemms/provider-hetzner/internal/controller/volume"
 )
@@ -34,6 +35,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		config.Setup,
 		firewall.Setup,
 		network.Setup,
+		placementgroup.Setup,
 		server.Setup,
 		volume.Setup,
 	} {
