@@ -1,0 +1,43 @@
+# Example based on https://docs.hetzner.cloud/#load-balancers-create-a-load-balancer
+apiVersion: cloud.hetzner.crossplane.io/v1alpha1
+kind: LoadBalancer
+metadata:
+  name: example
+spec:
+  forProvider:
+    algorithm: round_robin
+    networkZone: eu-central
+    type: lb11
+    labels:
+      environment: prod
+      example.com/my: label
+      just-a-key: ""
+    services:
+      - destinationPort: 80
+        healthCheck:
+          http:
+            domain: example.com
+            path: /
+            response: '{"status":"ok"}'
+            statusCodes:
+              - 2??
+              - 3??
+          port: 4711
+          protocol: http
+          retries: 3
+          timeout: 10s
+          interval: 15s
+        listenPort: 80
+        protocol: http
+        proxyProtocol: true
+        http:
+          stickySessions: true
+          cookieName: HCLBSTICKY
+          cookieLifetime: 300s
+    targets:
+      - type: label_selector
+        labels:
+          environment: prod
+        usePrivateIP: false
+  providerConfigRef:
+    name: example
